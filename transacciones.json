@@ -1,0 +1,58 @@
+[
+  {
+    "tipo": "ingreso",
+    "concepto": "pago jmi contractors",
+    "monto": 700.0,
+    "fecha": "2025-07-18",
+    "categoria": "Ingreso",
+    "id": 1
+  },
+  {
+    "tipo": "gasto",
+    "concepto": "compra de material",
+    "monto": 120.0,
+    "fecha": "2025-07-18",
+    "categoria": "Otros",
+    "id": 2
+  },
+  {
+    "tipo": "ingreso",
+    "concepto": "PAGO JMI CONTRACTORS",
+    "monto": 700.0,
+    "fecha": "2025-07-15",
+    "categoria": "Ingreso",
+    "id": 3
+  },
+  {
+    "tipo": "gasto",
+    "concepto": "COMIDA CASA",
+    "monto": 300.0,
+    "fecha": "2025-07-20",
+    "categoria": "Comida",
+    "id": 4
+  },
+  {
+    "tipo": "gasto",
+    "concepto": "MATERIALES TRABAJO",
+    "monto": 250.0,
+    "fecha": "2025-07-20",
+    "categoria": "Otros",
+    "id": 5
+  },
+  {
+    "tipo": "gasto",
+    "concepto": "FIESTA DE FIN DE SEMANA",
+    "monto": 200.0,
+    "fecha": "2025-07-20",
+    "categoria": "Entretenimiento",
+    "id": 6
+  },
+  {
+    "tipo": "gasto",
+    "concepto": "ROPA",
+    "monto": 135.0,
+    "fecha": "2025-07-21",
+    "categoria": "Hogar",
+    "id": 7
+  }
+]

@@ -1,0 +1,104 @@
+/* Colores corporativos para finanzas */
+:root {
+    --finance-primary: #2c3e50;     /* Azul oscuro - profesional */
+    --finance-secondary: #3498db;   /* Azul brillante - confianza */
+    --finance-success: #27ae60;     /* Verde - crecimiento */
+    --finance-danger: #e74c3c;      /* Rojo - alertas */
+    --finance-warning: #f39c12;     /* Naranja - advertencias */
+    --finance-light: #ecf0f1;       /* Gris claro - fondo */
+    --finance-dark: #2c3e50;        /* Azul oscuro - texto */
+}
+
+/* Estilos generales */
+body.finance-bg {
+    background-color: #f8f9fa;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.finance-card {
+    background-color: white;
+    border: 1px solid #e0e0e0;
+}
+
+.finance-title {
+    color: var(--finance-primary);
+    font-weight: 700;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+}
+
+.finance-subtitle {
+    color: var(--finance-dark);
+    font-weight: 600;
+}
+
+/* Estilos para tarjetas */
+.card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+
+.card-header {
+    font-weight: 600;
+}
+
+/* Estilos para botones */
+.btn-success {
+    background-color: var(--finance-success);
+    border-color: var(--finance-success);
+}
+
+.btn-danger {
+    background-color: var(--finance-danger);
+    border-color: var(--finance-danger);
+}
+
+.btn-primary {
+    background-color: var(--finance-secondary);
+    border-color: var(--finance-secondary);
+}
+
+/* Estilos para la tabla */
+.table {
+    margin-bottom: 0;
+}
+
+.table th {
+    background-color: var(--finance-primary);
+    color: white;
+    font-weight: 500;
+}
+
+.table-hover tbody tr:hover {
+    background-color: rgba(52, 152, 219, 0.1);
+}
+
+/* Estilos para badges */
+.badge {
+    font-weight: 500;
+    padding: 0.35em 0.65em;
+}
+
+/* Estilos responsivos */
+@media (max-width: 768px) {
+    .finance-title {
+        font-size: 1.8rem;
+    }
+    
+    .card {
+        margin-bottom: 1.5rem;
+    }
+}
+
+/* Animaciones */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.table tbody tr {
+    animation: fadeIn 0.5s ease-in-out;
+}

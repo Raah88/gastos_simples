@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Finanzas Personales</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Estilos personalizados -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body class="finance-bg">
+    <div class="container mt-4">
+        <div class="finance-card p-4 rounded shadow">
+            <h1 class="text-center mb-4 finance-title">
+                <i class="fas fa-wallet me-2"></i>Mis Finanzas Personales
+            </h1>
+            
+            <!-- Resumen financiero -->
+            <div class="row mb-4">
+                <div class="col-md-4 mb-3 mb-md-0">
+                    <div class="card h-100 bg-success bg-opacity-10">
+                        <div class="card-body text-center">
+                            <h5 class="card-title finance-subtitle">Ingresos Totales</h5>
+                            <p class="card-text fs-3 text-success fw-bold" id="total-ingresos">$0.00</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-3 mb-md-0">
+                    <div class="card h-100 bg-danger bg-opacity-10">
+                        <div class="card-body text-center">
+                            <h5 class="card-title finance-subtitle">Gastos Totales</h5>
+                            <p class="card-text fs-3 text-danger fw-bold" id="total-gastos">$0.00</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card h-100 bg-primary bg-opacity-10">
+                        <div class="card-body text-center">
+                            <h5 class="card-title finance-subtitle">Balance</h5>
+                            <p class="card-text fs-3 text-primary fw-bold" id="balance-total">$0.00</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Formularios -->
+            <div class="row">
+                <!-- Formulario de Ingresos -->
+                <div class="col-lg-6 mb-4">
+                    <div class="card h-100 border-success">
+                        <div class="card-header bg-success text-white">
+                            <h3 class="card-title mb-0"><i class="fas fa-money-bill-wave me-2"></i>Registrar Ingreso</h3>
+                        </div>
+                        <div class="card-body">
+                            <form id="form-ingreso">
+                                <div class="mb-3">
+                                    <label for="concepto-ingreso" class="form-label">Concepto</label>
+                                    <input type="text" class="form-control" id="concepto-ingreso" placeholder="Ej: Salario, Freelance..." required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="monto-ingreso" class="form-label">Monto ($)</label>
+                                    <input type="number" step="0.01" min="0" class="form-control" id="monto-ingreso" placeholder="0.00" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="fecha-ingreso" class="form-label">Fecha</label>
+                                    <input type="date" class="form-control" id="fecha-ingreso" required>
+                                </div>
+                                <button type="submit" class="btn btn-success w-100">
+                                    <i class="fas fa-plus-circle me-2"></i>Agregar Ingreso
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Formulario de Gastos -->
+                <div class="col-lg-6 mb-4">
+                    <div class="card h-100 border-danger">
+                        <div class="card-header bg-danger text-white">
+                            <h3 class="card-title mb-0"><i class="fas fa-shopping-cart me-2"></i>Registrar Gasto</h3>
+                        </div>
+                        <div class="card-body">
+                            <form id="form-gasto">
+                                <div class="mb-3">
+                                    <label for="concepto-gasto" class="form-label">Concepto</label>
+                                    <input type="text" class="form-control" id="concepto-gasto" placeholder="Ej: Comida, Transporte..." required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="monto-gasto" class="form-label">Monto ($)</label>
+                                    <input type="number" step="0.01" min="0" class="form-control" id="monto-gasto" placeholder="0.00" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="categoria-gasto" class="form-label">Categoría</label>
+                                    <select class="form-select" id="categoria-gasto" required>
+                                        <option value="" selected disabled>Seleccione...</option>
+                                        <option value="Hogar">Hogar</option>
+                                        <option value="Comida">Comida</option>
+                                        <option value="Transporte">Transporte</option>
+                                        <option value="Entretenimiento">Entretenimiento</option>
+                                        <option value="Salud">Salud</option>
+                                        <option value="Educación">Educación</option>
+                                        <option value="Otros">Otros</option>
+                                    </select>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="fecha-gasto" class="form-label">Fecha</label>
+                                    <input type="date" class="form-control" id="fecha-gasto" required>
+                                </div>
+                                <button type="submit" class="btn btn-danger w-100">
+                                    <i class="fas fa-minus-circle me-2"></i>Agregar Gasto
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Historial de transacciones -->
+            <div class="card mt-4">
+                <div class="card-header bg-primary text-white">
+                    <h3 class="card-title mb-0"><i class="fas fa-history me-2"></i>Historial de Transacciones</h3>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-hover" id="tabla-transacciones">
+                            <thead>
+                                <tr>
+                                    <th>Fecha</th>
+                                    <th>Concepto</th>
+                                    <th>Categoría</th>
+                                    <th>Tipo</th>
+                                    <th>Monto</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Las transacciones se agregarán aquí dinámicamente -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS y dependencias -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Script personalizado -->
+    <script>
+        $(document).ready(function() {
+            // Cargar transacciones al iniciar
+            cargarTransacciones();
+            
+            // Manejar envío de formulario de ingreso
+            $('#form-ingreso').submit(function(e) {
+                e.preventDefault();
+                const concepto = $('#concepto-ingreso').val();
+                const monto = parseFloat($('#monto-ingreso').val());
+                const fecha = $('#fecha-ingreso').val();
+                
+                if (concepto && monto && fecha) {
+                    agregarTransaccion({
+                        tipo: 'ingreso',
+                        concepto: concepto,
+                        monto: monto,
+                        fecha: fecha,
+                        categoria: 'Ingreso'
+                    });
+                    
+                    // Limpiar formulario
+                    this.reset();
+                }
+            });
+            
+            // Manejar envío de formulario de gasto
+            $('#form-gasto').submit(function(e) {
+                e.preventDefault();
+                const concepto = $('#concepto-gasto').val();
+                const monto = parseFloat($('#monto-gasto').val());
+                const categoria = $('#categoria-gasto').val();
+                const fecha = $('#fecha-gasto').val();
+                
+                if (concepto && monto && categoria && fecha) {
+                    agregarTransaccion({
+                        tipo: 'gasto',
+                        concepto: concepto,
+                        monto: monto,
+                        fecha: fecha,
+                        categoria: categoria
+                    });
+                    
+                    // Limpiar formulario
+                    this.reset();
+                }
+            });
+            
+            // Función para cargar transacciones
+            function cargarTransacciones() {
+                $.ajax({
+                    url: '/transacciones',
+                    method: 'GET',
+                    success: function(data) {
+                        actualizarResumen(data);
+                        actualizarTabla(data);
+                    }
+                });
+            }
+            
+            // Función para agregar una transacción
+            function agregarTransaccion(transaccion) {
+                $.ajax({
+                    url: '/transacciones',
+                    method: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify(transaccion),
+                    success: function(data) {
+                        cargarTransacciones();
+                    }
+                });
+            }
+            
+            // Función para eliminar una transacción
+            $(document).on('click', '.btn-eliminar', function() {
+                const id = $(this).data('id');
+                
+                if (confirm('¿Estás seguro de eliminar esta transacción?')) {
+                    $.ajax({
+                        url: `/transacciones/${id}`,
+                        method: 'DELETE',
+                        success: function(data) {
+                            cargarTransacciones();
+                        }
+                    });
+                }
+            });
+            
+            // Función para actualizar el resumen financiero
+            function actualizarResumen(transacciones) {
+                let totalIngresos = 0;
+                let totalGastos = 0;
+                
+                transacciones.forEach(t => {
+                    if (t.tipo === 'ingreso') {
+                        totalIngresos += t.monto;
+                    } else {
+                        totalGastos += t.monto;
+                    }
+                });
+                
+                const balance = totalIngresos - totalGastos;
+                
+                $('#total-ingresos').text('$' + totalIngresos.toFixed(2));
+                $('#total-gastos').text('$' + totalGastos.toFixed(2));
+                $('#balance-total').text('$' + balance.toFixed(2));
+                
+                // Cambiar color del balance según sea positivo o negativo
+                const balanceElement = $('#balance-total');
+                balanceElement.removeClass('text-success text-danger text-primary');
+                
+                if (balance > 0) {
+                    balanceElement.addClass('text-success');
+                } else if (balance < 0) {
+                    balanceElement.addClass('text-danger');
+                } else {
+                    balanceElement.addClass('text-primary');
+                }
+            }
+            
+            // Función para actualizar la tabla de transacciones
+            function actualizarTabla(transacciones) {
+                const tbody = $('#tabla-transacciones tbody');
+                tbody.empty();
+                
+                // Ordenar por fecha (más reciente primero)
+                transacciones.sort((a, b) => new Date(b.fecha) - new Date(a.fecha));
+                
+                transacciones.forEach(t => {
+                    const fila = `
+                        <tr>
+                            <td>${t.fecha}</td>
+                            <td>${t.concepto}</td>
+                            <td>${t.categoria}</td>
+                            <td>
+                                <span class="badge ${t.tipo === 'ingreso' ? 'bg-success' : 'bg-danger'}">
+                                    ${t.tipo === 'ingreso' ? 'Ingreso' : 'Gasto'}
+                                </span>
+                            </td>
+                            <td class="${t.tipo === 'ingreso' ? 'text-success' : 'text-danger'}">
+                                ${t.tipo === 'ingreso' ? '+' : '-'}$${t.monto.toFixed(2)}
+                            </td>
+                            <td>
+                                <button class="btn btn-sm btn-outline-danger btn-eliminar" data-id="${t.id}">
+                                    <i class="fas fa-trash-alt"></i>
+                                </button>
+                            </td>
+                        </tr>
+                    `;
+                    tbody.append(fila);
+                });
+            }
+        });
+    </script>
+</body>
+</html>
